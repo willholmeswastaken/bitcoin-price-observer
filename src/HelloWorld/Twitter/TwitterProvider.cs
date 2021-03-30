@@ -19,8 +19,8 @@ namespace HelloWorld.Twitter
 
         public async Task<ITweet> SendTweet(BitcoinPrice price)
         {
-            var tweet =
-                $"The current price of bitcoin is {price.Current.ToString("C")}. It has changed by {price.LastDayChange.ToString("F")}% in the last 24 hours #bitcoin";
+            var changed = price.LastDayChange < 0 ? "decreased" : "increased";
+            var tweet = $"The current price of bitcoin is {price.Current.ToString("C")}. It has {changed} by {price.LastDayChange.ToString("F")}% in the last 24 hours #btc #bitcoin #bitcoins #cryptocurrency";
             return await _client.Tweets.PublishTweetAsync(tweet);
         }
     }
